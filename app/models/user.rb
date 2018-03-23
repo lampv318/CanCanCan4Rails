@@ -11,4 +11,3 @@ class User
     role == role_name
   end
 end
- 
