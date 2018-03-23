@@ -2,8 +2,4 @@
 <% if can? :index, Project %>
   <%= link_to 'Projects', projects_path, class: 'btn btn-lg btn-primary' %>
 <% end %>
-<ul class="nav navbar-nav">
-  <% if can? :create, Project %>
-    <li><%= link_to 'Add Project', new_project_path %></li>
-  <% end %>
-</ul>
+

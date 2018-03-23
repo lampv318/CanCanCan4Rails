@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323172340) do
+ActiveRecord::Schema.define(version: 20180323182323) do
 
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "ongoing"
+    t.index ["ongoing"], name: "index_projects_on_ongoing"
   end
 
 end
