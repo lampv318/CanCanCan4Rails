@@ -1,14 +1,15 @@
 class ProjectsController < ApplicationController
+  before_action :load_projects, only: :index
   load_and_authorize_resource
 
   def index
-    @projects = Project.all
-    authorize! :index, @project
+    # @projects = Project.all
+    # authorize! :index, @project
   end
 
   def new
-    @project = Project.new
-    authorize! :new, @project
+    # @project = Project.new
+    # authorize! :new, @project
   end
 
   def create
@@ -23,8 +24,8 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
-    authorize! :edit, @project
+    # @project = Project.find(params[:id])
+    # authorize! :edit, @project
   end
 
   def update
@@ -52,6 +53,10 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title)
+    params.require(:project).permit(:title, :ongoing)
+  end
+
+  def load_projects
+    @projects = Project.accessible_by(current_ability).order('created_at DESC')
   end
 end

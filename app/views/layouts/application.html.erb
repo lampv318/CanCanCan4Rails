@@ -1,34 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CanCanCan4Rails</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <nav class="navbar navbar-inverse">
-      <div class="container">
-        <div class="navbar-header">
-          <%= link_to 'iCan', root_path, class: 'navbar-brand' %>
-        </div>
-        <div id="navbar">
-          <ul class="nav navbar-nav">
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-  <div class="container">
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>">
-        <%= value %>
-      </div>
-    <% end %>
-    <%= yield %>
-  </div>
+<head>
+  <meta charset="utf-8">
+  <title>ICan</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
 
 <nav class="navbar navbar-inverse">
   <div class="container">
@@ -37,6 +16,9 @@
     </div>
     <div id="navbar">
       <ul class="nav navbar-nav">
+        <% if can? :create, Project %>
+          <li><%= link_to 'Add Project', new_project_path %></li>
+        <% end %>
       </ul>
 
       <ul class="nav navbar-nav pull-right">
@@ -62,6 +44,21 @@
     </div>
   </div>
 </nav>
-  
-  </body>
+
+<div class="container">
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+      <%= value %>
+    </div>
+  <% end %>
+  <%= yield %>
+</div>
+
+<div id="footer">
+  <div class="container">
+    <p class="text-muted">Created by <a href="http://bodrovis.tech" target="_blank">lampv</a></p>
+  </div>
+</div>
+
+</body>
 </html>
